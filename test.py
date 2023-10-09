@@ -1,12 +1,14 @@
 import re
 
 def build_html_contact_item(name, phone):
-    if re.match(r'^([a-zA-Z]*.)\s([A-Z][a-z]*)\s([A-Z][a-z]*)$', name) and re.match(r'^(\+[0-9]{3})\s([0-9]{9})$', phone):
+    if re.search(r'^([a-zA-Z]*.)\s([A-Z][a-z]*)\s([A-Z][a-z]*)$', name) and re.search(r'^(\+[0-9]{3})\s([0-9]{9})$', phone):
         raise Exception("Nesmi obsahovat html.")
+    return "<div class=\"contact_item\"><h2>"+name+"</h2><p>Phone: "+phone+"</p></div>"
 
 def build_html_img(path, width, height, description=""):
-    if re.match(r'^([\/][a-zA-Z0-9&^%$@!#]*?([a-zA-Z]*(.[a-z]{2,5})))*$', path) and re.match(r'^[0-9]{3}$', width) and re.match(r'^[0-9]{3}$', height) and re.match(r'^([A-Z]{1}[a-z]*)\s([a-z]*)$', description):
+    if re.search(r'^([\/][a-zA-Z0-9&^%$@!#]*?([a-zA-Z]*(.[a-z]{2,5})))*$', path) and re.search(r'^[0-9]{3}$', width) and re.search(r'^[0-9]{3}$', height) and re.match(r'^([A-Z]{1}[a-z]*)\s([a-z]*)$', description):
         raise Exception("Nesmi obsahovat html.")
+    return "<img src=\""+path+"\" alt=\""+description+"\" width=\""+str(width)+"\" height=\""+str(height)+"\">"
 
 
 def build_xml_from_money_transactions(money_transactions):
